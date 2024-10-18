@@ -3,7 +3,7 @@ public enum Hand {
     HIGH_CARD(0),
     PAIR(1),
     TWO_PAIR(2),
-    SET(3),
+    TRIPS(3),
     STRAIGHT(4),
     FLUSH(5),
     FULL_HOUSE(6),

@@ -5,9 +5,7 @@ public class Player {
 
 	private List<Card> hand;
 
-	Player() {
-		hand = new ArrayList<>();
-	}
+	Player() { hand = new ArrayList<>(); }
 	Player(List<Card> hand) { setHand(hand); }
 
 	public List<Card> getHand() {

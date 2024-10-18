@@ -16,11 +16,14 @@ public class Main {
         Map<String, Integer> handPulledAmount = new HashMap<>();
         Map<String, Map<Hand, Integer>> winningHandMap = new HashMap<>();
 
-        for (int i = 0; i < 1000000; i++) {
+        int rounds = 10_000_000;
+        int playerCount = 8;
+
+        for (int i = 0; i < rounds; i++) {
             List<Player> players = new ArrayList<>();
             initializeDeck();
             communityCards = new ArrayList<>();
-            for (int p = 0; p < 14; p++) {
+            for (int p = 0; p < playerCount; p++) {
                 Player ply = new Player();
                 ply.createHand();
                 players.add(ply);
@@ -49,13 +52,15 @@ public class Main {
                 bestHands.put(player, bestHand);
             }
 
-           // printCommunityCards();
+            // printCommunityCards();
             if (HandEvaluator.findWinner(bestHands) != null) {
 
                 Player winner = HandEvaluator.findWinner(bestHands).getKey();
                 Hand winnerHand = HandEvaluator.findWinner(bestHands).getValue();
 
                 //System.out.println("Winner is " + winner.printHand() + " with " + winnerHand);
+
+
 
                 List<Card> hand = winner.getHand();
                 boolean isSuited = hand.get(0).suit() == hand.get(1).suit();
@@ -64,7 +69,7 @@ public class Main {
                         + (isSuited ? "s" : "");
 
 //Map<String, Map<Hand, Integer>> winningHandMap = new HashMap<>();
-               // System.out.println(handString);
+                // System.out.println(handString);
                 if (handWinAmount.containsKey(handString)) {
                     handWinAmount.put(handString, handWinAmount.get(handString) + 1);
                 } else {
@@ -84,6 +89,21 @@ public class Main {
                 }
 
                 System.out.print("\rTested " + i + " hands, winner: " + handString + " (" + Math.round((double)handWinAmount.get(handString) / (double)handPulledAmount.get(handString) * 100) + "% win), hand: " + winnerHand);
+            } else {
+                /*
+                for (Player p : players) {
+                    if (HandEvaluator.evaluateHand(p.getHand(), communityCards) == Hand.ROYAL_FLUSH) {
+                        System.out.println("\n" + i + " tests");
+                        for (Player pl : players) {
+                            System.out.println(pl.printHand() + " (" + HandEvaluator.evaluateHand(pl.getHand(), communityCards) + ")");
+                        }
+                        printCommunityCards();
+                        return;
+                    }
+                }
+
+                Some testing for pushes with super high hands, found a bug with royal flush
+                 */
             }
         }
         for (Hand hand : hands) {
@@ -110,7 +130,7 @@ public class Main {
                     + winningHandMap.get(handString).getOrDefault(Hand.HIGH_CARD, 0) + "|"
                     + winningHandMap.get(handString).getOrDefault(Hand.PAIR, 0) + "|"
                     + winningHandMap.get(handString).getOrDefault(Hand.TWO_PAIR, 0) + "|"
-                    + winningHandMap.get(handString).getOrDefault(Hand.SET, 0) + "|"
+                    + winningHandMap.get(handString).getOrDefault(Hand.TRIPS, 0) + "|"
                     + winningHandMap.get(handString).getOrDefault(Hand.STRAIGHT, 0) + "|"
                     + winningHandMap.get(handString).getOrDefault(Hand.FLUSH, 0) + "|"
                     + winningHandMap.get(handString).getOrDefault(Hand.FULL_HOUSE, 0) + "|"

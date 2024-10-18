@@ -12,7 +12,7 @@ public class HandEvaluator {
         if (isFullHouse(allCards)) return Hand.FULL_HOUSE;
         if (isFlush(allCards)) return Hand.FLUSH;
         if (isStraight(allCards)) return Hand.STRAIGHT;
-        if (isThreeOfAKind(allCards)) return Hand.SET;
+        if (isThreeOfAKind(allCards)) return Hand.TRIPS;
         if (isTwoPair(allCards)) return Hand.TWO_PAIR;
         if (isPair(allCards)) return Hand.PAIR;
         return Hand.HIGH_CARD;
@@ -63,7 +63,7 @@ public class HandEvaluator {
                 return compareStraight(hand1, hand2);
             case PAIR:
             case TWO_PAIR:
-            case SET:
+            case TRIPS:
                 return comparePairs(hand1, hand2);
             case HIGH_CARD:
                 return compareHighCard(hand1, hand2);
