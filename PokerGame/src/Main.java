@@ -2,7 +2,7 @@ import java.util.*;
 
 // testing to the river with 14 players, 1 million times
 // this was tested with 2,3,4,8 and 14 players to the river 1 to 10 million times
-// data might not agree with consensus best hands becuase in correctly played poker, most hands don't play as long
+// data might not agree with consensus best hands because in correctly played poker, most hands don't play as long
 
 public class Main {
     private static List<Card> deck = new ArrayList<>();
